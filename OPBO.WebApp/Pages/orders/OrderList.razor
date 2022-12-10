@@ -7,14 +7,20 @@
 
 <br/>
 <OrderListComponent SearchTerm="@searchTerm"/>
-
+<PageListComponent Page="1" PageMax="5" RecrodCount="10" OnGoToPage="OnGoToPage"/>
+@CurrentPage
 @code {
     private string searchTerm = string.Empty;
-
+    private int CurrentPage = 1;
     private void OnOrderSearch(string searchTerm)
     {
         this.searchTerm = searchTerm;
 
+    }
+
+    private void OnGoToPage(int page)
+    {
+        CurrentPage = page;
     }
 
 }

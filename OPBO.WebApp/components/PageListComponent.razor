@@ -1,0 +1,38 @@
+﻿@inject NavigationManager NavigationManager
+@if (Page > 0)
+{
+    <div class="pagination">
+        
+    @for(int i=1;i<=RecrodCount/PageMax;i++)
+    {
+            <a href="javascript:void(0)" class="@Page==i?'active':''" @onclick="() =>GoToPage(i)">@i</a>
+    }
+
+    </div>
+ 
+
+}
+
+
+@code{
+ 
+    [Parameter]
+    public int Page { get; set; }
+
+   
+
+    [Parameter]
+    public int RecrodCount { get; set; }
+
+            [Parameter]
+    public int PageMax { get; set; }
+
+        [Parameter]
+    public EventCallback <int> OnGoToPage{ get; set; }
+
+    private void GoToPage(int i)
+    {
+       OnGoToPage.InvokeAsync(i);
+
+    }
+}
