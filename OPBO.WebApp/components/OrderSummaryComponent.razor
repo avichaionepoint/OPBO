@@ -1,0 +1,36 @@
+﻿@inject IViewOrdersSummaryUseCase ViewOrdersSummaryUseCase
+
+
+    
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>מספר סניף</th>
+            <th>הזמנות תקינות</th>
+            <th>הזמנות שגויות</th>
+  
+        </tr>
+    </thead>
+    <tbody>
+ 
+            <OrderSummaryListItemComponent Orders="Orders"/>
+       
+    </tbody>
+</table>
+
+
+@code {
+    private List<OrderSummary> Orders = new List<OrderSummary>();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        Orders = (await ViewOrdersSummaryUseCase.ExecuteAsync()).ToList();
+    }
+  
+
+
+
+
+}

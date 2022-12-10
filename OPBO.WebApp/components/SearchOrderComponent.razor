@@ -1,0 +1,19 @@
+﻿<div class="input-group">
+    <input type="text" class="form-control"
+    placeholder="הקלד מספר הזמנה או מסמפר מסמך או תאריך בפורמט DD/MM/YY"
+    @bind-value="OrderToSearch"
+    />
+    <button type="button" class="btn-success input-group-text" @onclick="OnSearch">חיפוש</button>
+</div>
+
+@code {
+    private string OrderToSearch = string.Empty;
+
+    [Parameter]
+    public EventCallback <string> OnSearchOrder{ get; set; }
+
+    private void OnSearch()
+    {
+        OnSearchOrder.InvokeAsync(OrderToSearch);
+    }
+}

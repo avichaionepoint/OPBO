@@ -1,0 +1,38 @@
+﻿@inject IViewOrdersUseCase ViewOrdersByDateUseCase
+
+
+    
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>מספר הזמנה</th>
+            <th>תאריך</th>
+            <th>סניף</th>
+            <th>מספר מסמך</th>
+            <th>שם פרטי</th>
+            <th>סה"כ</th>
+            <th>פרטים</th>
+        </tr>
+    </thead>
+    <tbody>
+ 
+            <OrderListItemComponent Orders="Orders"/>
+       
+    </tbody>
+</table>
+
+
+@code {
+    private List<Order> Orders = new List<Order>();
+
+    [Parameter]
+    public string SearchTerm { get; set; } = string.Empty;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Orders = (await ViewOrdersByDateUseCase.ExecuteAsync(this.SearchTerm)).ToList();
+    }
+
+
+}

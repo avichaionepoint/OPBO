@@ -1,0 +1,15 @@
+﻿@page "/"
+@inject IViewOrdersUseCase ViewOrdersByDateUseCase
+
+<PageTitle>הזמנות </PageTitle>
+
+
+<h3>הזמנות לתאריך @DateTime.Now.ToShortDateString()</h3>
+
+<br />
+<OrderSummaryComponent></OrderSummaryComponent>
+
+@code {
+
+
+}

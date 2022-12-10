@@ -1,0 +1,34 @@
+﻿@inject NavigationManager NavigationManager
+@if (Orders != null && Orders.Count > 0)
+{
+    @foreach (var order in Orders)
+    {
+        <tr>
+            <td>@order.Id</td>
+            <td>@order.CreateDate</td>
+            <td>@order.BranchCode</td>
+            <td>@order.DocNo</td>
+            <td>@order.FirstName</td>
+            <td>@order.Total</td>
+            <td>
+                <button type="button" class="btn btn-light" @onclick="(()=>ViewOrder(order.Id))">פרטים</button>
+            </td>
+        </tr>
+    }
+
+}
+else
+{
+    <h1>לא נמצאו הזמנות</h1>
+}
+
+@code{
+    [Parameter]
+    public List<Order> Orders { get; set; }
+
+    private void ViewOrder(string id)
+    {
+        NavigationManager.NavigateTo($"/orderdetails/{id}");
+
+    }
+}

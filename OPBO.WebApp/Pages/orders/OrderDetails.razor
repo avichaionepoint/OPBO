@@ -1,0 +1,117 @@
+﻿@page "/orderdetails/{id}"
+
+@inject IViewOrderDetailsUseCase ViewOrderDetailsUseCase
+
+<h3>פרטי הזמנה</h3>
+<br />
+<h4>כותרת </h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>מספר הזמנה</th>
+            <th>תאריך</th>
+            <th>סניף</th>
+            <th>מספר מסמך</th>
+            <th>שם פרטי</th>
+            <th>סה"כ</th>
+ 
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>@order.Id</th>
+            <th>@order.CreateDate</th>
+            <th>@order.BranchCode</th>
+            <th>@order.DocNo</th>
+            <th>@order.FirstName</th>
+            <th>@order.Total</th>
+ 
+        </tr> 
+            
+       
+    </tbody>
+</table>
+
+<h4>כתובת </h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>עיר</th>
+            <th>רחוב</th>
+            <th>מיקוד</th>
+
+ 
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>@order.Address.City</th>
+            <th>@order.Address.Street</th>
+            <th>@order.Address.Zip</th>
+            </tr>
+            
+       
+    </tbody>
+</table>
+
+<h4>אשראי </h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>מספר</th>
+            <th>סוג</th>
+            <th>תשלומים</th>
+
+ 
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>@order.Payment.CardNymber</th>
+            <th>@order.Payment.CardType</th>
+            <th>@order.Payment.PaymentNum</th>
+            </tr>
+            
+       
+    </tbody>
+</table>
+
+<h4>סל </h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>שורה</th>
+            <th>שם</th>
+            <th>כמות</th>
+            <th>מחיר</th>
+            <th>סה"כ</th>
+
+ 
+        </tr>
+    </thead>
+    <tbody>
+    @foreach(OrderItem item in order.Items)
+            {
+                <tr>
+                    <td>@item.LineNumber</td>
+                     <td>@item.Name</td>
+                      <td>@item.Quantity</td>
+                       <td>@item.Price</td>
+                        <td>@item.Total</td>
+                </tr>
+            }
+
+    </tbody>
+</table>
+
+    @code {
+        [Parameter]
+        public string id { get; set; }
+
+        private Order order = null;
+
+        protected override async Task OnParametersSetAsync()
+        {
+            this.order = await ViewOrderDetailsUseCase.ExecuteAsync(id);
+        }
+}

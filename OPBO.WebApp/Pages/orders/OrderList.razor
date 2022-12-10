@@ -1,0 +1,20 @@
+﻿@page "/orders"
+
+<h3>הזמנות</h3>
+
+<br />
+<SearchOrderComponent OnSearchOrder="OnOrderSearch"></SearchOrderComponent>
+
+<br/>
+<OrderListComponent SearchTerm="@searchTerm"/>
+
+@code {
+    private string searchTerm = string.Empty;
+
+    private void OnOrderSearch(string searchTerm)
+    {
+        this.searchTerm = searchTerm;
+
+    }
+
+}

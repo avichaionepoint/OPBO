@@ -1,0 +1,21 @@
+﻿@if (Orders != null && Orders.Count > 0)
+{
+    @foreach (var order in Orders)
+    {
+        <tr>
+            <td>@order.BranchNo</td>
+            <td>@order.Ok.ToString()</td>
+            <td>@order.Bad.ToString()</td>
+        </tr>
+    }
+
+}
+else
+{
+    <h1>לא נמצאו הזמנות</h1>
+}
+
+@code{
+    [Parameter]
+    public List<OrderSummary> Orders { get; set; }
+}
